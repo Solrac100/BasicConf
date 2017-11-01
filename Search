@@ -1,0 +1,20 @@
+#!/bin/bash
+
+sitios=(sitio1 sitio2 sitioN)
+
+for item in ${sitios[*]}
+do
+    site=$item
+    var1=$(egrep -lRZ "www.$site")
+    var2=$(egrep -lRZ "/$site")
+    if [ ! -z $var1 ]; then
+     echo "www a dev"
+     grep1=$(egrep -lRZ "www.$site" | xargs -0 -l sed -i -e  's%www.'$site'%dev.'$site'%g')
+    fi
+    if [ ! -z $var2 ]; then
+     echo "nada a dev"
+     grep2=$(egrep -lRZ "/$site" | xargs -0 -l sed -i -e  's%/'$site'%/dev.'$site'%g')
+    fi
+    #grep1=$(egrep -rl "/www.$site" | xargs -0 -l sed -i -e  's%/www.'$site'%/dev.'$site'%g')
+    #grep2=$(egrep -rl "/$site" | xargs -0 -l sed -i -e  's%/'$site'%/dev.'$site'%g')
+done

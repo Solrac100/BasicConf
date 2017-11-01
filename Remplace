@@ -1,0 +1,9 @@
+#! /bin/bash
+
+#Search and replace de archivos, donde separa la extension y concatena un 1
+
+f=${1##*/} 
+name=${f%.*}
+ext=${f##*.}
+newName=$name'1.'$ext
+sed 's%'$2'%'$3'%g' $1  > $newName
